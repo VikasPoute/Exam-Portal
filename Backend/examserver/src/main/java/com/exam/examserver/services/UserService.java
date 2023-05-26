@@ -13,4 +13,6 @@ public interface UserService {
     public User getUser(String userName) throws Exception;
 
     public void deleteUser(Long userId) throws Exception;
+
+    public User updateUser(String username, User user) throws Exception;
 }
