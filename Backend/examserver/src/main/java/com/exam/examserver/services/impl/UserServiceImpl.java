@@ -1,5 +1,6 @@
 package com.exam.examserver.services.impl;
 
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,18 @@ public class UserServiceImpl implements UserService {
         }
 
         return ur;
+    }
+
+    // Getting user
+    @Override
+    public User getUser(String userName) throws Exception {
+        return this.userRepository.findByUsername(userName);
+    }
+
+    // Deleting The User
+    @Override
+    public void deleteUser(Long userId) throws Exception {
+        this.userRepository.deleteById(userId);
     }
 
 }
