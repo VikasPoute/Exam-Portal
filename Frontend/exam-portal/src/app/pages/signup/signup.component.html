@@ -1,0 +1,109 @@
+<div class="bootstrap-wrapper">
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 r-card">
+        <div class="container text-center">
+          <img src="../../../assets/images/users-solid.svg" alt="" style="height: 50px" />
+        </div>
+        <h1 class="text-center">Register Here</h1>
+        <form action="" [formGroup]="registerForm" #signUpForm (ngSubmit)="userRegistration()">
+          <!-- User Name -->
+          <div class="form-group">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Username</mat-label>
+              <input matInput placeholder="Enter Username" name="username" [(ngModel)]="user.username"
+                formControlName="username" />
+              <mat-icon matSuffix>person</mat-icon>
+              <mat-error *ngIf="
+                  this.registerForm.get('username')?.touched &&
+                  this.registerForm.get('username')?.hasError('required')
+                ">Username is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- User Password -->
+          <div class="form-group">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Password</mat-label>
+              <input type="password" matInput placeholder="Enter Password" name="password" [(ngModel)]="user.password"
+                formControlName="password" />
+              <mat-icon matSuffix>lock</mat-icon>
+              <mat-error *ngIf="
+                  this.registerForm.get('password')?.touched &&
+                  this.registerForm.get('password')?.hasError('required')
+                ">Password is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- First Name -->
+          <div class="form-group">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>First Name</mat-label>
+              <input matInput placeholder="Enter First Name" name="firstName" [(ngModel)]="user.firstName"
+                formControlName="firstName" />
+              <mat-icon matSuffix>person</mat-icon>
+              <mat-error *ngIf="
+                  this.registerForm.get('firstName')?.touched &&
+                  this.registerForm.get('firstName')?.hasError('required')
+                ">First Name is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Last Name -->
+          <div class="form-group">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Last Name</mat-label>
+              <input matInput placeholder="Enter Last Name" name="lastName" [(ngModel)]="user.lastName"
+                formControlName="lastName" />
+              <mat-icon matSuffix>person</mat-icon>
+              <mat-error *ngIf="
+                  this.registerForm.get('lastName')?.touched &&
+                  this.registerForm.get('lastName')?.hasError('required')
+                ">Password is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Email</mat-label>
+              <input type="email" matInput placeholder="Enter Email" name="email" [(ngModel)]="user.email"
+                formControlName="email" />
+              <mat-icon matSuffix>mail</mat-icon>
+              <mat-error *ngIf="
+                  this.registerForm.get('email')?.touched &&
+                  this.registerForm.get('email')?.hasError('required')
+                ">Email is required</mat-error>
+              <mat-error *ngIf="
+                  this.registerForm.get('email')?.touched &&
+                  this.registerForm.get('email')?.hasError('email') &&
+                  this.registerForm.get('email')?.hasError('pattern')
+                ">
+                Email must be a valid Email</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Phone number -->
+          <div class="form-group">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Phone</mat-label>
+              <input matInput placeholder="Enter Phone Number" name="phone" [(ngModel)]="user.phone"
+                formControlName="phone" />
+              <mat-icon matSuffix>call</mat-icon>
+              <mat-error *ngIf="
+                  this.registerForm.get('phone')?.touched &&
+                  this.registerForm.get('phone')?.hasError('required')
+                ">Password is required</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="container text-center">
+            <button [disabled]="!registerForm.valid" type="submit" class="btn btn-primary btn-lg btn-block full-width">
+              Register
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
