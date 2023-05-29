@@ -4,12 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import baseUrl from './Urls';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class UserService {
-  constructor(private http: HttpClient) {}
 
-  // Add a user
+  constructor(private http: HttpClient) { }
+
   public addUser(user: User) {
     return this.http.post(`${baseUrl}/user/`, user);
   }

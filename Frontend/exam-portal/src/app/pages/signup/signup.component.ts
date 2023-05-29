@@ -1,32 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { usernameValidator } from '../validators/username.validator';
+import { emailValidator } from '../validators/email.validator';
+import { phoneNumberValidator } from '../validators/phone.validator';
+import { passwordValidator } from '../validators/password.validator';
 import { User } from './User';
-import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css'],
+  styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
+  signupForm!: FormGroup;
+
   public user: User = new User();
 
-  registerForm = new FormGroup({
-    email: new FormControl(null, [
-      Validators.required,
-      Validators.email,
-      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-    ]),
-    username: new FormControl(null, [Validators.required]),
-    firstName: new FormControl(null, [Validators.required]),
-    lastName: new FormControl(null, [Validators.required]),
-    password: new FormControl(null, [Validators.required]),
-    phone: new FormControl(null, [Validators.required]),
-  });
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService
+  ) {}
 
-  constructor(private userService: UserService) {}
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.signupForm = this.formBuilder.group({
+      username: ['', Validators.required, usernameValidator()],
+      password: ['', Validators.required, passwordValidator()],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email, emailValidator()]],
+      phone: ['', Validators.required, phoneNumberValidator()],
+    });
+  }
 
   userRegistration() {
     this.userService.addUser(this.user).subscribe(
@@ -35,7 +41,7 @@ export class SignupComponent implements OnInit {
         Swal.fire({
           icon: 'success',
           title: 'User Registration Success !!',
-          text:'The registration was successfully registered....'
+          text: 'The registration was successfully registered....',
         });
       },
       (error) => {
@@ -43,7 +49,7 @@ export class SignupComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'The User Name is already in use',
+          text: 'Something went wrong',
         });
       }
     );
