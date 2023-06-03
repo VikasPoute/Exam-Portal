@@ -1,41 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
+import { User } from '../signup/User';
+import { passwordValidator } from '../validators/password.validator';
+import { usernameValidator } from '../validators/username.validator';
 
 @Component({
-  selector: 'app-statistics',
+  selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  registerForm!: FormGroup;
-  submitted = false;
-  showModal!: boolean;
-  constructor(private formBuilder: FormBuilder) {}
-  show() {
-    this.showModal = true; // Show-Hide Modal Check
-  }
-  //Bootstrap Modal Close event
-  hide() {
-    this.showModal = false;
-  }
+  signupForm!: FormGroup;
+
+  public user: User = new User();
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService
+  ) {}
+
   ngOnInit() {
-    this.registerForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+    this.signupForm = this.formBuilder.group({
+      username: ['', Validators.required, usernameValidator()],
+      password: ['', Validators.required, passwordValidator()],
     });
   }
-  // convenience getter for easy access to form fields
-  get f() {
-    return this.registerForm.controls;
-  }
-  onSubmit() {
-    this.submitted = true;
-    // stop here if form is invalid
-    if (this.registerForm.invalid) {
-      return;
-    }
-    if (this.submitted) {
-      this.showModal = false;
-    }
+
+  userLogin() {
+
   }
 }

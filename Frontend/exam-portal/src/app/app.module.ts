@@ -20,6 +20,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
     SublevelMenuComponent,
     FooterComponent,
     SignupComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

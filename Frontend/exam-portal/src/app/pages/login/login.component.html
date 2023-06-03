@@ -1,1 +1,43 @@
-<h1>Login</h1>
+<div class="container">
+  <div class="row">
+    <div class="col offset-mx-3">
+      <div class="card">
+        <div class="card-head">Exam Portal - Login</div>
+        <div class="card-body">
+          <div class="row">
+            <form [formGroup]="signupForm" (ngSubmit)="userLogin()">
+              <div class="col-md-6 offset-md-3">
+                <!-- Username -->
+                <mat-form-field appearance="outline">
+                  <mat-label>Username</mat-label>
+                  <input matInput formControlName="username" placeholder="Username">
+                  <mat-icon matSuffix>person</mat-icon>
+                  <mat-error *ngIf="signupForm.get('username')?.hasError('required') && signupForm.get('username')?.touched">
+                    Username is required
+                  </mat-error>
+                  <mat-error *ngIf="signupForm.get('username')?.hasError('usernameValidator') && signupForm.get('username')?.touched">
+                    Invalid username. Username must only contain alphanumeric characters and underscores.
+                  </mat-error>
+                </mat-form-field>
+
+                <!-- Password -->
+                <mat-form-field appearance="outline">
+                  <mat-label>Password</mat-label>
+                  <input type="password" matInput formControlName="password" placeholder="User Password">
+                  <mat-icon matSuffix>lock</mat-icon>
+                  <mat-error *ngIf="signupForm.get('password')?.hasError('required') && signupForm.get('password')?.touched">
+                    Password is required
+                  </mat-error>
+                  <mat-error *ngIf="signupForm.get('password')?.hasError('passwordValidator') && signupForm.get('password')?.touched">
+                    Invalid password format
+                  </mat-error>
+                </mat-form-field>
+                <button mat-raised-button color="primary" type="submit">Login</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 .content {
   padding-top: 10px;
 }
+
 .row {
   display: flex;
   gap: 10px;
@@ -12,6 +13,7 @@
 
 .action {
   padding: 0px 25px 20px;
+
   button {
     flex: 1;
   }
@@ -19,4 +21,16 @@
 
 .card {
   width: 100%;
+}
+
+.row {
+
+  .names {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    mat-form-field {
+      width: 49%;
+    }
+  }
 }

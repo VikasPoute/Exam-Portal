@@ -1,12 +1,12 @@
 <div class="container">
   <div class="row">
-    <div class="col-6 offset-md-3">
+    <div class="col offset-mx-3">
       <div class="card">
         <div class="card-head">Exam Portal - Registration</div>
         <div class="card-body">
           <div class="row">
             <form [formGroup]="signupForm" (ngSubmit)="userRegistration()">
-              <div class="col md-6 offset-mx-3">
+              <div class="col-md-6 offset-md-3">
                 <!-- Username -->
                 <mat-form-field appearance="outline">
                   <mat-label>Username</mat-label>
@@ -16,7 +16,8 @@
                     *ngIf="signupForm.get('username')?.hasError('required') && signupForm.get('username')?.touched">
                     Username is required
                   </mat-error>
-                  <mat-error *ngIf="signupForm.get('username')?.hasError('usernameValidator') && signupForm.get('username')?.touched">
+                  <mat-error
+                    *ngIf="signupForm.get('username')?.hasError('usernameValidator') && signupForm.get('username')?.touched">
                     Invalid username. Username must only contain alphanumeric characters and underscores.
                   </mat-error>
 
@@ -55,26 +56,28 @@
                 </mat-form-field>
 
                 <!-- First Name -->
-                <mat-form-field appearance="outline">
-                  <mat-label>First Name</mat-label>
-                  <input matInput formControlName="firstName" placeholder="User First Name">
-                  <mat-icon matSuffix>person</mat-icon>
-                  <mat-error
-                    *ngIf="signupForm.get('firstName')?.hasError('required') && signupForm.get('firstName')?.touched">
-                    First name is required
-                  </mat-error>
-                </mat-form-field>
+                <div class="names">
+                  <mat-form-field appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="firstName" placeholder="User First Name">
+                    <mat-icon matSuffix>person</mat-icon>
+                    <mat-error
+                      *ngIf="signupForm.get('firstName')?.hasError('required') && signupForm.get('firstName')?.touched">
+                      First name is required
+                    </mat-error>
+                  </mat-form-field>
 
-                <!-- Last Name -->
-                <mat-form-field appearance="outline">
-                  <mat-label>Last Name</mat-label>
-                  <input matInput formControlName="lastName" placeholder="User Last Name">
-                  <mat-icon matSuffix>person</mat-icon>
-                  <mat-error
-                    *ngIf="signupForm.get('lastName')?.hasError('required') && signupForm.get('lastName')?.touched">
-                    Last name is required
-                  </mat-error>
-                </mat-form-field>
+                  <!-- Last Name -->
+                  <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="lastName" placeholder="User Last Name">
+                    <mat-icon matSuffix>person</mat-icon>
+                    <mat-error
+                      *ngIf="signupForm.get('lastName')?.hasError('required') && signupForm.get('lastName')?.touched">
+                      Last name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
 
                 <!-- Contact -->
                 <mat-form-field appearance="outline">
