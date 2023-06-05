@@ -21,6 +21,14 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { authInterceptorProvider } from './services/intercepter/auth.interceptor';
+import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
+import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
+import { AuthGuardService } from './services/guard/auth-guard.service';
+import { UserGuard } from './services/guard/user/user-guard.guard';
+import { AdminGuard } from './services/guard/admin/admin-guard.guard';
+import { AuthGuard } from './services/guard/auth-guard.guard';
 
 @NgModule({
   declarations: [
@@ -31,7 +39,9 @@ import { LoginComponent } from './pages/login/login.component';
     SublevelMenuComponent,
     FooterComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    AdminDashboardComponent,
+    UserDashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,9 +57,10 @@ import { LoginComponent } from './pages/login/login.component';
     NgbModule,
     MatDividerModule,
     MatDialogModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule,
   ],
-  providers: [],
+  providers: [authInterceptorProvider, UserGuard, AdminGuard, AuthGuard],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

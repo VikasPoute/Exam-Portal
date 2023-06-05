@@ -1,22 +1,11 @@
-import {
-  animate,
-  keyframes,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
-import {
-  Component,
-  Output,
-  EventEmitter,
-  OnInit,
-  HostListener,
-} from '@angular/core';
+import { animate, keyframes, style, transition, trigger } from '@angular/animations';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { fadeInOut, INavbarData } from './helper';
-import { navbarData } from './nav-data';
-import { MatDialog } from '@angular/material/dialog';
-import { SignupComponent } from 'src/app/pages/signup/signup.component';
+import { LoginService } from 'src/app/services/login.service';
+import { afterLoginData, beforeLoginData } from './nav-data';
+import { BehaviorSubject } from 'rxjs';
+import Swal from 'sweetalert2';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -46,26 +35,59 @@ export class SidenavComponent implements OnInit {
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
   collapsed = false;
   screenWidth = 0;
-  navData = navbarData;
+  navDataBeforeLogin: INavbarData[] = beforeLoginData;
+  navDataAfterLogin: INavbarData[] = afterLoginData;
+  navBar: BehaviorSubject<INavbarData[]> = new BehaviorSubject<INavbarData[]>([]);
   multiple: boolean = false;
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.screenWidth = window.innerWidth;
-    if (this.screenWidth <= 768) {
-      this.collapsed = false;
-      this.onToggleSideNav.emit({
-        collapsed: this.collapsed,
-        screenWidth: this.screenWidth,
-      });
-    }
-  }
-
-  constructor(public router: Router, private dialog: MatDialog) {}
+  constructor(
+    public router: Router,
+    private loginService: LoginService) { }
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
+    this.updateNavData();
+
+    // Subscribe to login/logout events
+    this.loginService.getLoginStatusChangeObservable().subscribe(() => {
+      this.updateNavData();
+    });
   }
+
+  updateNavData(): void {
+    if (this.loginService.isUserLogin()) {
+      if (this.loginService.getUserRole() == 'ADMIN') {
+        const getUsername = {
+          routeLink: 'admin-dashboard',
+          icon: 'fal fa-user',
+          label: this.loginService.getUser().username,
+        };
+
+        const usernameExists = afterLoginData.some(item => item.label === getUsername.label);
+
+        if (!usernameExists) {
+          afterLoginData.unshift(getUsername); // Add the object at the beginning of the array
+        }
+      } else if (this.loginService.getUserRole() == "NORMAL") {
+        const getUsername = {
+          routeLink: '/user-dashboard',
+          icon: 'fal fa-user',
+          label: this.loginService.getUser().username,
+        };
+
+        const usernameExists = afterLoginData.some(item => item.label === getUsername.label);
+
+        if (!usernameExists) {
+          afterLoginData.unshift(getUsername); // Add the object at the beginning of the array
+        }
+      }
+
+      this.navBar.next(afterLoginData);
+    } else {
+      this.navBar.next(beforeLoginData);
+    }
+  }
+
 
   toggleCollapse(): void {
     this.collapsed = !this.collapsed;
@@ -94,11 +116,56 @@ export class SidenavComponent implements OnInit {
 
   shrinkItems(item: INavbarData): void {
     if (!this.multiple) {
-      for (let modelItem of this.navData) {
+      for (let modelItem of this.navDataBeforeLogin.concat(this.navDataAfterLogin)) {
         if (item !== modelItem && modelItem.expanded) {
           modelItem.expanded = false;
         }
       }
     }
   }
+
+  // logout from the application
+  public userLogout() {
+    if (this.loginService.isUserLogin()) {
+      this.confirmLogout().then((result) => {
+        if (result.isConfirmed) {
+          this.logout();
+          this.logoutSuccessfully();
+        }
+      });
+    }
+  }
+
+  // Function to confirm user logout
+  confirmLogout(): Promise<any> {
+    return Swal.fire({
+      title: 'Logout',
+      text: 'Are you sure you want to logout?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Logout',
+      cancelButtonText: 'Cancel',
+      reverseButtons: true
+    }).then((result) => {
+      return result;
+    });
+  }
+
+  public logoutSuccessfully() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Logout Successful!',
+      text: 'You have been logged out.',
+      showConfirmButton: false,
+      timer: 2000 // Display the alert for 2 seconds
+    });
+  }
+
+
+  // Function to logout the user
+  logout() {
+    this.loginService.logOut();
+    this.router.navigate(['']);
+  }
+
 }

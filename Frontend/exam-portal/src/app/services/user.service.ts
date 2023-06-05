@@ -13,4 +13,8 @@ export class UserService {
   public addUser(user: User) {
     return this.http.post(`${baseUrl}/user/`, user);
   }
+
+  // public getUser(username:String) {
+  //   return this.http.
+  // }
 }

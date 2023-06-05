@@ -70,4 +70,15 @@ public class UserServiceImpl implements UserService {
             throw new Exception("User not found.");
         }
     }
+
+    @Override
+    public User findByUsername(String username) throws Exception {
+        User user = userRepository.findByUsername(username);
+        if (user != null) {
+            return user;
+        }
+
+        return null;
+    }
+
 }

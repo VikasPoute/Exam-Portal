@@ -15,4 +15,6 @@ public interface UserService {
     public void deleteUser(Long userId) throws Exception;
 
     public User updateUser(String username, User user) throws Exception;
+
+    public User findByUsername(String username) throws Exception;
 }

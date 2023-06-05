@@ -10,7 +10,7 @@
                 <!-- Username -->
                 <mat-form-field appearance="outline">
                   <mat-label>Username</mat-label>
-                  <input matInput formControlName="username" placeholder="Username">
+                  <input matInput formControlName="username"  [(ngModel)]="user.username" name="username" placeholder="Username">
                   <mat-icon matSuffix>person</mat-icon>
                   <mat-error
                     *ngIf="signupForm.get('username')?.hasError('required') && signupForm.get('username')?.touched">
@@ -26,7 +26,8 @@
                 <!-- Email -->
                 <mat-form-field appearance="outline">
                   <mat-label>Email</mat-label>
-                  <input type="mail" matInput formControlName="email" placeholder="User Email">
+                  <input type="mail" matInput formControlName="email" [(ngModel)]="user.email" name="email"
+                    placeholder="User Email">
                   <mat-icon matSuffix>mail</mat-icon>
                   <mat-error *ngIf="signupForm.get('email')?.hasError('required') && signupForm.get('email')?.touched">
                     Email is required
@@ -43,7 +44,8 @@
                 <!-- Password -->
                 <mat-form-field appearance="outline">
                   <mat-label>Password</mat-label>
-                  <input type="password" matInput formControlName="password" placeholder="User Password">
+                  <input type="password" matInput formControlName="password" [(ngModel)]="user.password" name="password"
+                    placeholder="User Password">
                   <mat-icon matSuffix>lock</mat-icon>
                   <mat-error
                     *ngIf="signupForm.get('password')?.hasError('required') && signupForm.get('password')?.touched">
@@ -59,7 +61,8 @@
                 <div class="names">
                   <mat-form-field appearance="outline">
                     <mat-label>First Name</mat-label>
-                    <input matInput formControlName="firstName" placeholder="User First Name">
+                    <input matInput formControlName="firstName" [(ngModel)]="user.firstName" name="firstName"
+                      placeholder="User First Name">
                     <mat-icon matSuffix>person</mat-icon>
                     <mat-error
                       *ngIf="signupForm.get('firstName')?.hasError('required') && signupForm.get('firstName')?.touched">
@@ -70,7 +73,8 @@
                   <!-- Last Name -->
                   <mat-form-field appearance="outline">
                     <mat-label>Last Name</mat-label>
-                    <input matInput formControlName="lastName" placeholder="User Last Name">
+                    <input matInput formControlName="lastName" [(ngModel)]="user.lastName" name="lastName"
+                      placeholder="User Last Name">
                     <mat-icon matSuffix>person</mat-icon>
                     <mat-error
                       *ngIf="signupForm.get('lastName')?.hasError('required') && signupForm.get('lastName')?.touched">
@@ -82,7 +86,8 @@
                 <!-- Contact -->
                 <mat-form-field appearance="outline">
                   <mat-label>Contact No</mat-label>
-                  <input matInput formControlName="phone" placeholder="User Contact Number">
+                  <input matInput formControlName="phone" [(ngModel)]="user.phone" name="phone"
+                    placeholder="User Contact Number">
                   <mat-icon matSuffix>phone</mat-icon>
                   <mat-error *ngIf="signupForm.get('phone')?.hasError('required') && signupForm.get('phone')?.touched">
                     Contact number is required

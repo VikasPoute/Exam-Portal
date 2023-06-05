@@ -18,7 +18,7 @@ import com.exam.examserver.services.impl.UserDetailsServiceImpl;
 import java.security.Principal;
 
 @RestController
-// @CrossOrigin("*")
+@CrossOrigin("*")
 public class AuthenticateController {
 
     @Autowired

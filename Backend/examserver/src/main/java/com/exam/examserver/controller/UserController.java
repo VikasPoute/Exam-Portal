@@ -6,6 +6,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,19 +30,29 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @PostMapping("/")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<?> createUser(@RequestBody User user) {
         try {
             Role role = new Role(1002L, "NORMAL");
             UserRole userRole = new UserRole(user, role);
             Set<UserRole> roles = new HashSet<>();
             roles.add(userRole);
 
+            user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
+
+            User existingUser = userService.findByUsername(user.getUsername());
+            if (existingUser != null) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("User is already registered with the server.");
+            }
+
             User createdUser = this.userService.createUser(user, roles);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred.");
         }
     }
 
