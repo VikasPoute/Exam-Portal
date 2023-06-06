@@ -35,7 +35,7 @@ public class Quiz {
 
     @OneToMany(mappedBy = "quiz", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
-    private Set<Questions> questions = new LinkedHashSet<>();
+    private Set<Question> questions = new LinkedHashSet<>();
 
     public Quiz() {
     }
