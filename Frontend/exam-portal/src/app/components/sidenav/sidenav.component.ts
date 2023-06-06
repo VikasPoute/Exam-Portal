@@ -3,7 +3,7 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { fadeInOut, INavbarData } from './helper';
 import { LoginService } from 'src/app/services/login.service';
-import { afterLoginData, beforeLoginData } from './nav-data';
+import { adminLoginData, afterLoginData, beforeLoginData } from './nav-data';
 import { BehaviorSubject } from 'rxjs';
 import Swal from 'sweetalert2';
 
@@ -37,6 +37,7 @@ export class SidenavComponent implements OnInit {
   screenWidth = 0;
   navDataBeforeLogin: INavbarData[] = beforeLoginData;
   navDataAfterLogin: INavbarData[] = afterLoginData;
+  navAdminData: INavbarData[] = adminLoginData;
   navBar: BehaviorSubject<INavbarData[]> = new BehaviorSubject<INavbarData[]>([]);
   multiple: boolean = false;
 
@@ -58,20 +59,22 @@ export class SidenavComponent implements OnInit {
     if (this.loginService.isUserLogin()) {
       if (this.loginService.getUserRole() == 'ADMIN') {
         const getUsername = {
-          routeLink: 'admin-dashboard',
-          icon: 'fal fa-user',
+          routeLink: '/admin/profile',
+          icon: 'person',
           label: this.loginService.getUser().username,
         };
 
-        const usernameExists = afterLoginData.some(item => item.label === getUsername.label);
+        const usernameExists = this.navAdminData.some(item => item.label === getUsername.label);
 
         if (!usernameExists) {
-          afterLoginData.unshift(getUsername); // Add the object at the beginning of the array
+          this.navAdminData.unshift(getUsername); // Add the object at the beginning of the array
         }
+
+        this.navBar.next(this.navAdminData)
       } else if (this.loginService.getUserRole() == "NORMAL") {
         const getUsername = {
-          routeLink: '/user-dashboard',
-          icon: 'fal fa-user',
+          routeLink: '/profile',
+          icon: 'person',
           label: this.loginService.getUser().username,
         };
 
@@ -81,8 +84,6 @@ export class SidenavComponent implements OnInit {
           afterLoginData.unshift(getUsername); // Add the object at the beginning of the array
         }
       }
-
-      this.navBar.next(afterLoginData);
     } else {
       this.navBar.next(beforeLoginData);
     }

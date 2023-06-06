@@ -3,18 +3,18 @@ import { INavbarData } from './helper';
 export const beforeLoginData: INavbarData[] = [
   {
     routeLink: '/',
-    icon: 'fal fa-home',
+    icon: 'home',
     label: 'Home',
   },
   {
     routeLink: 'signup',
-    icon: 'fal fa-user-plus',
+    icon: 'person_add',
     label: 'Sign Up',
     open: true,
   },
   {
     routeLink: 'login',
-    icon: 'fal fa-sign-in',
+    icon: 'login',
     label: 'Login',
   },
 ];
@@ -22,7 +22,21 @@ export const beforeLoginData: INavbarData[] = [
 export const afterLoginData: INavbarData[] = [
   {
     routeLink: '',
-    icon: 'fal fa-sign-out',
+    icon: 'logout',
     label: 'Log Out',
   },
+];
+
+export const adminLoginData: INavbarData[] = [
+  {
+    routeLink: '/admin',
+    icon: 'home',
+    label: 'Home',
+  },
+  {
+    routeLink: '',
+    icon: 'logout',
+    label: 'Log Out',
+  },
+
 ];

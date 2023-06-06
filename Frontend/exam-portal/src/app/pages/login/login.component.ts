@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
 
       // Redirect ...ADMIN: Admin Dashboard
       if (this.loginService.getUserRole() == 'ADMIN') {
-        this.router.navigate(['/admin-dashboard'])
+        this.router.navigate(['/admin'])
       }
       // Redirect ...NORMAL: Normal Dashboard
 
