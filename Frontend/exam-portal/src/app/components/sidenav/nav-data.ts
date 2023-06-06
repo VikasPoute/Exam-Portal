@@ -34,6 +34,26 @@ export const adminLoginData: INavbarData[] = [
     label: 'Home',
   },
   {
+    routeLink: '/admin',
+    icon: 'category',
+    label: 'Categories',
+  },
+  {
+    routeLink: '/admin',
+    icon: 'playlist_add_circle',
+    label: 'Add Categories',
+  },
+  {
+    routeLink: '/admin',
+    icon: 'quiz',
+    label: 'Quizzes',
+  },
+  {
+    routeLink: '/admin',
+    icon: 'add_circle',
+    label: 'Add Quiz',
+  },
+  {
     routeLink: '',
     icon: 'logout',
     label: 'Log Out',

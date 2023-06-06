@@ -60,14 +60,15 @@ export class SidenavComponent implements OnInit {
       if (this.loginService.getUserRole() == 'ADMIN') {
         const getUsername = {
           routeLink: '/admin/profile',
-          icon: 'person',
+          icon: 'account_circle',
           label: this.loginService.getUser().username,
         };
 
         const usernameExists = this.navAdminData.some(item => item.label === getUsername.label);
 
         if (!usernameExists) {
-          this.navAdminData.unshift(getUsername); // Add the object at the beginning of the array
+          // this.navAdminData.unshift(getUsername); // Add the object at the beginning of the array
+          this.navAdminData.splice(1, 0, getUsername);
         }
 
         this.navBar.next(this.navAdminData)
@@ -81,7 +82,8 @@ export class SidenavComponent implements OnInit {
         const usernameExists = afterLoginData.some(item => item.label === getUsername.label);
 
         if (!usernameExists) {
-          afterLoginData.unshift(getUsername); // Add the object at the beginning of the array
+          // afterLoginData.unshift(getUsername); // Add the object at the beginning of the array
+          this.navAdminData.splice(1, 0, getUsername);
         }
       }
     } else {
