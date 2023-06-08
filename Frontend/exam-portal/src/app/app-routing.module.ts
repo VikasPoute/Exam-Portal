@@ -10,6 +10,8 @@ import { AuthGuard } from './services/guard/auth-guard.guard';
 import { AdminComponent } from './pages/admin/admin/admin.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
+import { ViewCategoryComponent } from './pages/admin/view-category/view-category.component';
+import { AddCategoryComponent } from './pages/admin/add-category/add-category.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,6 +25,8 @@ const routes: Routes = [
       { path: '', component: AdminDashboardComponent },
       { path: 'admin-dashboard', component: AdminDashboardComponent },
       { path: 'profile', component: ProfileComponent },
+      { path: 'categories', component: ViewCategoryComponent },
+      { path: 'add-category', component: AddCategoryComponent },
     ],
   },
   {

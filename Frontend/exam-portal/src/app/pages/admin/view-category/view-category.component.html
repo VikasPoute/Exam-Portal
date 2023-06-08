@@ -1,0 +1,23 @@
+<h1>All Categories</h1>
+<mat-card>
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+      *ngFor="let category of categories;">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ category.categoryName }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-panel-description>
+        {{ category.description }}
+      </mat-panel-description>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div class="container mt-3 mb-3">
+    <div class="row">
+      <div class="col text-center">
+        <button routerLink="/admin/add-category" mat-raised-button color="primary">Add Category</button>
+      </div>
+    </div>
+  </div>
+</mat-card>

@@ -34,12 +34,12 @@ export const adminLoginData: INavbarData[] = [
     label: 'Home',
   },
   {
-    routeLink: '/admin',
+    routeLink: '/admin/categories',
     icon: 'category',
     label: 'Categories',
   },
   {
-    routeLink: '/admin',
+    routeLink: '/admin/add-category',
     icon: 'playlist_add_circle',
     label: 'Add Categories',
   },

@@ -30,7 +30,10 @@ import { AdminGuard } from './services/guard/admin/admin-guard.guard';
 import { AuthGuard } from './services/guard/auth-guard.guard';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AdminComponent } from './pages/admin/admin/admin.component';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { AddCategoryComponent } from './pages/admin/add-category/add-category.component';
+import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
+import { ViewCategoryComponent } from './pages/admin/view-category/view-category.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,8 @@ import {MatTableModule} from '@angular/material/table';
     UserDashboardComponent,
     AdminComponent,
     ProfileComponent,
+    AddCategoryComponent,
+    ViewCategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +67,8 @@ import {MatTableModule} from '@angular/material/table';
     MatDialogModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatTableModule
+    MatTableModule,
+    MatExpansionModule,
   ],
   providers: [authInterceptorProvider, UserGuard, AdminGuard, AuthGuard],
   bootstrap: [AppComponent],
