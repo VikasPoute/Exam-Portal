@@ -4,7 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Options {
@@ -19,11 +21,8 @@ public class Options {
     private String option4;
     private String answer;
 
-    // @OneToMany(mappedBy = "options", cascade = CascadeType.ALL)
-    // @JsonIgnore
-    // private Set<Questions> questions = new LinkedHashSet<>();
-
-    @ManyToOne
+    @OneToOne(mappedBy = "options")
+    @JsonIgnore
     private Question question;
 
     public Long getOptionId() {
@@ -72,6 +71,14 @@ public class Options {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
 }

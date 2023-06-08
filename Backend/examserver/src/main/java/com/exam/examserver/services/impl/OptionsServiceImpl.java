@@ -1,14 +1,12 @@
 package com.exam.examserver.services.impl;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.exam.examserver.model.exam.Options;
 import com.exam.examserver.model.exam.Question;
 import com.exam.examserver.repository.OptionsRepository;
+import com.exam.examserver.repository.QuestionRepository;
 import com.exam.examserver.services.OptionService;
 
 @Service
@@ -16,6 +14,9 @@ public class OptionsServiceImpl implements OptionService {
 
     @Autowired
     private OptionsRepository optionsRepository;
+
+    @Autowired
+    public QuestionRepository questionRepository;
 
     @Override
     public Options addOptions(Options options) {
@@ -38,8 +39,9 @@ public class OptionsServiceImpl implements OptionService {
     }
 
     @Override
-    public Set<Options> getOptions(Question question) {
-        return new LinkedHashSet<>(this.optionsRepository.findByQuestion(question));
+    public Options getOptions(Long questionId) {
+        Question question = this.questionRepository.findById(questionId).get();
+        return optionsRepository.findById(question.getOptions().getOptionId()).get();
     }
 
 }

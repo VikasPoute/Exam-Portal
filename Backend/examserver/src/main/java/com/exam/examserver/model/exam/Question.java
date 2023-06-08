@@ -1,8 +1,5 @@
 package com.exam.examserver.model.exam;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,9 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Question {
@@ -26,12 +21,8 @@ public class Question {
     private String content;
     private String image;
 
-    // @ManyToOne(fetch = FetchType.EAGER)
-    // private Options options;
-
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private Set<Options> options = new LinkedHashSet<>();
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Options options;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Quiz quiz;
@@ -60,7 +51,13 @@ public class Question {
         this.image = image;
     }
 
-   
+    public Options getOptions() {
+        return options;
+    }
+
+    public void setOptions(Options options) {
+        this.options = options;
+    }
 
     public Quiz getQuiz() {
         return quiz;
@@ -68,14 +65,6 @@ public class Question {
 
     public void setQuiz(Quiz quiz) {
         this.quiz = quiz;
-    }
-
-    public Set<Options> getOptions() {
-        return options;
-    }
-
-    public void setOptions(Set<Options> options) {
-        this.options = options;
     }
 
 }
