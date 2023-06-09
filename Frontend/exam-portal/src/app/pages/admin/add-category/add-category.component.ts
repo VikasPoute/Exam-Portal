@@ -72,6 +72,7 @@ export class AddCategoryComponent implements OnInit {
           this.router.navigate(['/admin/categories'])
         } else {
           this.createCategory();
+          this.router.navigate(['/admin/categories'])
         }
       } else {
         this.showErrorSnackbar('Please fill in all required fields');

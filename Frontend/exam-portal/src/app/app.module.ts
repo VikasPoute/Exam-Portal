@@ -33,8 +33,12 @@ import { AdminComponent } from './pages/admin/admin/admin.component';
 import { MatTableModule } from '@angular/material/table';
 import { AddCategoryComponent } from './pages/admin/add-category/add-category.component';
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
+import { MatChipsModule } from '@angular/material/chips';
 import { ViewCategoryComponent } from './pages/admin/view-category/view-category.component';
 import { ViewQuizzesComponent } from './pages/admin/view-quizzes/view-quizzes.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { AddQuizComponent } from './pages/admin/add-quiz/add-quiz.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -52,6 +56,7 @@ import { ViewQuizzesComponent } from './pages/admin/view-quizzes/view-quizzes.co
     AddCategoryComponent,
     ViewCategoryComponent,
     ViewQuizzesComponent,
+    AddQuizComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +76,9 @@ import { ViewQuizzesComponent } from './pages/admin/view-quizzes/view-quizzes.co
     MatSnackBarModule,
     MatTableModule,
     MatExpansionModule,
+    MatChipsModule,
+    MatSlideToggleModule,
+    MatSelectModule
   ],
   providers: [authInterceptorProvider, UserGuard, AdminGuard, AuthGuard],
   bootstrap: [AppComponent],

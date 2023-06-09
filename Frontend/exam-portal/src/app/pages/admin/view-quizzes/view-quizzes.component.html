@@ -1,1 +1,41 @@
-<p>view-quizzes works!</p>
+<h1>All Quizzes</h1>
+<mat-card>
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+      *ngFor="let quiz of quizzes;">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{quiz.quizName}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{quiz.category.categoryName}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-panel-description>
+        {{quiz.quizDescription}}
+      </mat-panel-description>
+      <mat-divider></mat-divider>
+      <mat-panel-description>
+        <mat-chip-set class="example-chip" cdkDropList cdkDropListOrientation="horizontal">
+          <mat-chip class="example-box"> {{quiz.maxMarks}} Marks </mat-chip>
+          <mat-chip class="example-box"> {{quiz.numberOfQuestions}} Questions </mat-chip>
+          <mat-chip class="example-box"> {{quiz.maxMarks}} Attempts </mat-chip>
+          <mat-chip class="example-box">{{ quiz.active ? 'Published' : 'Not Published' }}</mat-chip>
+        </mat-chip-set>
+      </mat-panel-description>
+      <mat-divider></mat-divider>
+      <button mat-raised-button color="primary" class="mt-2"
+        (click)="editQuiz(quiz.quizId)"><mat-icon>edit_note</mat-icon>Edit</button>
+      &nbsp;
+      <button mat-raised-button color="warn" class="mt-2"
+        (click)="deleteQuiz(quiz.quizId)"><mat-icon>delete</mat-icon>Delete</button>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div class="container mt-3 mb-3">
+    <div class="row">
+      <div class="col text-center">
+        <button routerLink="/admin/add-quiz" mat-raised-button color="primary">Add Quiz</button>
+      </div>
+    </div>
+  </div>
+</mat-card>

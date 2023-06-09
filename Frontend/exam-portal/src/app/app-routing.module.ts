@@ -12,6 +12,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 import { ViewCategoryComponent } from './pages/admin/view-category/view-category.component';
 import { AddCategoryComponent } from './pages/admin/add-category/add-category.component';
+import { ViewQuizzesComponent } from './pages/admin/view-quizzes/view-quizzes.component';
+import { AddQuizComponent } from './pages/admin/add-quiz/add-quiz.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,6 +30,9 @@ const routes: Routes = [
       { path: 'categories', component: ViewCategoryComponent },
       { path: 'add-category', component: AddCategoryComponent },
       { path: 'update-category/:id', component: AddCategoryComponent },
+      { path: 'quizzes', component: ViewQuizzesComponent },
+      { path: 'add-quiz', component: AddQuizComponent },
+      { path: 'update-quiz/:id', component: AddQuizComponent },
     ],
   },
   {

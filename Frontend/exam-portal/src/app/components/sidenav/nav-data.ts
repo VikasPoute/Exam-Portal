@@ -44,12 +44,12 @@ export const adminLoginData: INavbarData[] = [
     label: 'Add Categories',
   },
   {
-    routeLink: '/admin',
+    routeLink: '/admin/quizzes',
     icon: 'quiz',
     label: 'Quizzes',
   },
   {
-    routeLink: '/admin',
+    routeLink: '/admin/add-quiz',
     icon: 'add_circle',
     label: 'Add Quiz',
   },

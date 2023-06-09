@@ -1,0 +1,76 @@
+<h1>Add New Quiz</h1>
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <form [formGroup]="quizForm" (ngSubmit)="submitQuiz()">
+        <div class="col-md-6 offset-md-3">
+          <!-- Quiz Name -->
+          <mat-form-field appearance="outline">
+            <mat-label>Quiz Name</mat-label>
+            <input matInput [(ngModel)]="quizData.quizName" name="quizName" formControlName="quizName">
+            <mat-error *ngIf="quizForm.get('quizName')?.invalid && quizForm.get('quizName')?.touched">
+              Quiz Name is required
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Quiz marks and number of questions -->
+          <div class="d-flex justify-content-between">
+            <mat-form-field appearance="outline">
+              <mat-label>Marks</mat-label>
+              <input matInput [(ngModel)]="quizData.maxMarks" name="maxMarks" formControlName="maxMarks">
+              <mat-error *ngIf="quizForm.get('maxMarks')?.invalid && quizForm.get('maxMarks')?.touched">
+                Marks is required
+              </mat-error>
+            </mat-form-field>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <mat-form-field appearance="outline">
+              <mat-label>No. Questions</mat-label>
+              <input matInput [(ngModel)]="quizData.numberOfQuestions" name="numberOfQuestions"
+                formControlName="numberOfQuestions">
+              <mat-error
+                *ngIf="quizForm.get('numberOfQuestions')?.invalid && quizForm.get('numberOfQuestions')?.touched">
+                Number of Questions is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Description -->
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput [(ngModel)]="quizData.quizDescription" name="quizDescription"
+              formControlName="quizDescription"></textarea>
+            <mat-error *ngIf="quizForm.get('quizDescription')?.invalid && quizForm.get('quizDescription')?.touched">
+              Description is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category" [(value)]="quizData.category.categoryId">
+              <mat-option *ngFor="let category of categories" [value]="category.categoryId">{{
+                category.categoryName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+          <!-- Quiz status -->
+          <section class="example-section">
+            <mat-slide-toggle class="example-margin" [color]="color" [(ngModel)]="quizData.active" name="active"
+              formControlName="active">
+              Publish Status
+            </mat-slide-toggle>
+          </section>
+          <div class="container">
+            <div class="row">
+              <div class="col text-center">
+                <button type="submit" mat-raised-button color="primary">
+                  {{ quizId ? 'Update' : 'Add' }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
