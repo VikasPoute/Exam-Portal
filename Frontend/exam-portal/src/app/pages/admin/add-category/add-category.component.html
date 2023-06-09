@@ -7,7 +7,8 @@
           <!-- Category Name -->
           <mat-form-field appearance="outline">
             <mat-label>Category Name</mat-label>
-            <input matInput autofocus formControlName="categoryName" name="categoryName" [(ngModel)]="category.categoryName">
+            <input matInput autofocus formControlName="categoryName" name="categoryName"
+              [(ngModel)]="category.categoryName">
             <mat-error
               *ngIf="categoryForm.get('categoryName')?.hasError('required') && categoryForm.get('categoryName')?.touched">
               Enter Category Name
@@ -17,7 +18,8 @@
           <!-- Description -->
           <mat-form-field appearance="outline">
             <mat-label>Description</mat-label>
-            <textarea matInput formControlName="description" name="description" required [(ngModel)]="category.description"></textarea>
+            <textarea matInput formControlName="description" name="description" required
+              [(ngModel)]="category.description"></textarea>
             <mat-error
               *ngIf="categoryForm.get('description')?.hasError('required') && categoryForm.get('description')?.touched">
               Enter Description for Category
@@ -26,7 +28,9 @@
           <div class="container">
             <div class="row">
               <div class="col text-center">
-                <button type="submit" mat-raised-button color="primary">Submit</button>
+                <button type="submit" mat-raised-button color="primary">
+                  {{ categoryId ? 'Update' : 'Submit' }}
+                </button>
               </div>
             </div>
           </div>

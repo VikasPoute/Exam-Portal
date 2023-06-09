@@ -27,6 +27,7 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'categories', component: ViewCategoryComponent },
       { path: 'add-category', component: AddCategoryComponent },
+      { path: 'update-category/:id', component: AddCategoryComponent },
     ],
   },
   {

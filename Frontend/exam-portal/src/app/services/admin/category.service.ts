@@ -18,4 +18,17 @@ export class CategoryService {
     return this.http.post(`${baseUrl}/category/add-category`, category);
   }
 
+  public updateCategory(category: Category) {
+    return this.http.put(`${baseUrl}/category/update-category`, category);
+  }
+
+  public deleteCategory(categoryId: number) {
+    return this.http.delete(`${baseUrl}/category/delete-category/${categoryId}`);
+  }
+
+  public getCategoryById(categoryId: number) {
+    return this.http.get(`${baseUrl}/category/get-category/${categoryId}`);
+  }
+
+
 }

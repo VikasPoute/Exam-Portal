@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Category } from './category';
 import { CategoryService } from 'src/app/services/admin/category.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-category',
@@ -13,13 +14,16 @@ import { CategoryService } from 'src/app/services/admin/category.service';
 export class AddCategoryComponent implements OnInit {
 
   categoryForm!: FormGroup;
-  category = { categoryName: '', description: '' }
+  category: Category = new Category();
   characterCount: number = 0;
+  categoryId: number | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +31,32 @@ export class AddCategoryComponent implements OnInit {
       categoryName: ['', [Validators.required]],
       description: ['', [Validators.required]]
     });
+
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id) {
+        this.categoryId = +id;
+        this.getCategory();
+      }
+    });
+  }
+
+  getCategory(): void {
+    if (this.categoryId) {
+      this.categoryService.getCategoryById(this.categoryId).subscribe(
+        (data: any) => {
+          this.category = data;
+          this.categoryForm.patchValue({
+            categoryName: this.category.categoryName,
+            description: this.category.description
+          });
+        },
+        (error: any) => {
+          console.error(error);
+          this.showErrorSnackbar('Failed to get category');
+        }
+      );
+    }
   }
 
   onDescriptionChange(value: string) {
@@ -37,23 +67,46 @@ export class AddCategoryComponent implements OnInit {
   addNewCategory(): void {
     if (this.categoryForm.valid) {
       if (!this.isEmpty(this.category.categoryName) && !this.isEmpty(this.category.description)) {
-        this.categoryService.addNewCategory(this.category).subscribe(
-          (data) => {
-            console.log('Response:', data);
-            this.showSuccessSweetAlert('Success', 'Category added successfully');
-            this.resetForm();
-          },
-          (error: any) => {
-            console.error(error);
-            this.showErrorSnackbar('Failed to add category');
-          }
-        );
+        if (this.categoryId) {
+          this.updateCategory();
+          this.router.navigate(['/admin/categories'])
+        } else {
+          this.createCategory();
+        }
       } else {
         this.showErrorSnackbar('Please fill in all required fields');
       }
     } else {
       this.showErrorSnackbar('Please fill in all required fields');
     }
+  }
+
+  createCategory(): void {
+    this.categoryService.addNewCategory(this.category).subscribe(
+      (data) => {
+        console.log('Response:', data);
+        this.showSuccessSweetAlert('Success', 'Category added successfully');
+        this.resetForm();
+      },
+      (error: any) => {
+        console.error(error);
+        this.showErrorSnackbar('Failed to add category');
+      }
+    );
+  }
+
+  updateCategory(): void {
+    this.categoryService.updateCategory(this.category).subscribe(
+      (data) => {
+        console.log('Response:', data);
+        this.showSuccessSweetAlert('Success', 'Category updated successfully');
+        this.resetForm();
+      },
+      (error: any) => {
+        console.error(error);
+        this.showErrorSnackbar('Failed to update category');
+      }
+    );
   }
 
   private isEmpty(value: string): boolean {
@@ -64,6 +117,7 @@ export class AddCategoryComponent implements OnInit {
     this.categoryForm.reset();
     this.category = new Category();
     this.characterCount = 0;
+    this.categoryId = null;
   }
 
   showSuccessSweetAlert(title: string, message: string): void {
@@ -71,6 +125,7 @@ export class AddCategoryComponent implements OnInit {
       icon: 'success',
       title: title,
       text: message,
+      showConfirmButton: false,
     });
   }
 

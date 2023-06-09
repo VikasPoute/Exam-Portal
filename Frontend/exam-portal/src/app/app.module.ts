@@ -34,6 +34,7 @@ import { MatTableModule } from '@angular/material/table';
 import { AddCategoryComponent } from './pages/admin/add-category/add-category.component';
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { ViewCategoryComponent } from './pages/admin/view-category/view-category.component';
+import { ViewQuizzesComponent } from './pages/admin/view-quizzes/view-quizzes.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ViewCategoryComponent } from './pages/admin/view-category/view-category
     ProfileComponent,
     AddCategoryComponent,
     ViewCategoryComponent,
+    ViewQuizzesComponent,
   ],
   imports: [
     BrowserModule,

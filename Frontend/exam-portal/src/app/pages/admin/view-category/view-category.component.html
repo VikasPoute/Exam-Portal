@@ -11,6 +11,10 @@
       <mat-panel-description>
         {{ category.description }}
       </mat-panel-description>
+      <mat-divider></mat-divider>
+      <button mat-raised-button color="primary" class="mt-2" (click)="editCategory(category.categoryId)"><mat-icon>edit_note</mat-icon>Edit</button>
+      &nbsp;
+      <button mat-raised-button color="warn" class="mt-2" (click)="deleteCategory(category.categoryId)"><mat-icon>delete</mat-icon>Delete</button>
     </mat-expansion-panel>
   </mat-accordion>
   <div class="container mt-3 mb-3">
