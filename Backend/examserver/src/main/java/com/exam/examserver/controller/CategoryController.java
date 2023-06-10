@@ -38,12 +38,12 @@ public class CategoryController {
         }
     }
 
-    @GetMapping("/{categoryId}")
-    public ResponseEntity<String> getCategory(@PathVariable("categoryId") Long categoryId) {
+    @GetMapping("/get-category/{categoryId}")
+    public ResponseEntity<?> getCategory(@PathVariable("categoryId") Long categoryId) {
         try {
             Category category = categoryService.getCategory(categoryId);
             if (category != null) {
-                return ResponseEntity.ok(category.toString());
+                return ResponseEntity.ok(category);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Category not found.");
             }
