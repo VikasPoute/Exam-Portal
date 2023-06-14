@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import baseUrl from './Urls';
+import urlList from './Urls';
 
 @Injectable({
   providedIn: 'root',
@@ -13,12 +13,12 @@ export class LoginService {
 
   // Generate token
   public generateToken(loginData: any) {
-    return this.http.post(`${baseUrl}/generate-token`, loginData);
+    return this.http.post(`${urlList.authenticator.GENERATE_TOKEN}`, loginData);
   }
 
   // Get current user
   public getCurrentUser() {
-    return this.http.get(`${baseUrl}/current-user`);
+    return this.http.get(`${urlList.authenticator.CURRENT_USER}`);
   }
 
   // Login user
