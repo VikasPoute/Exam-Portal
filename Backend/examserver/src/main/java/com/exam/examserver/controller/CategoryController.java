@@ -21,7 +21,7 @@ import com.exam.examserver.services.CategoryService;
 
 @RestController
 @RequestMapping("/category")
-@CrossOrigin("*")
+@CrossOrigin("https://localhost:8080")
 public class CategoryController {
 
     @Autowired

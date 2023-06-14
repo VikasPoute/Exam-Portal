@@ -18,7 +18,7 @@ import com.exam.examserver.services.OptionService;
 import com.exam.examserver.services.QuestionService;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:4200")
 @RequestMapping("/option")
 public class OptionsController {
 
