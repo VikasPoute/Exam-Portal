@@ -21,7 +21,7 @@ const urlList = {
   questions: {
     ADD_QUESTION: `${BASE_URL}/question/add-question`,
     UPDATE_QUESTION: `${BASE_URL}/question/update-question`,
-    GET_ALL_QUESTIONS: `${BASE_URL}/question/get-all-questions`,
+    GET_ALL_QUESTIONS: `${BASE_URL}/question/get-all-questions/`,
     GET_QUESTION: `${BASE_URL}/question/get-question`,
     DELETE_QUESTION: `${BASE_URL}/question/delete-question`,
   },
@@ -29,8 +29,8 @@ const urlList = {
     ADD_QUIZ: `${BASE_URL}/quiz/add-quiz`,
     UPDATE_QUIZ: `${BASE_URL}/quiz/update-quiz`,
     GET_ALL_QUIZZES: `${BASE_URL}/quiz/all-quizzes`,
-    GET_QUIZ: `${BASE_URL}/quiz/get-quiz`,
-    DELETE_QUIZ: `${BASE_URL}/quiz/delete-quiz`,
+    GET_QUIZ: `${BASE_URL}/quiz/get-quiz/`,
+    DELETE_QUIZ: `${BASE_URL}/quiz/delete-quiz/`,
   },
   user: {
     CREATE_USER: `${BASE_URL}/user/`,

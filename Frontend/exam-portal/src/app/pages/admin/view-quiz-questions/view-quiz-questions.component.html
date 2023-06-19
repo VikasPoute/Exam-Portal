@@ -1,0 +1,67 @@
+<mat-card>
+  <mat-card-header>
+    <h1>Questions of {{ quizName }}</h1>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="quiz-container">
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let question of paginatedQuestions; let i = index" [expanded]="step === i"
+          (opened)="panelOpenState = true" (closed)="panelOpenState = false" [hideToggle]="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <strong>Q.{{ getQuestionIndex(i) }})&nbsp;</strong> {{ question.content }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-panel-description>
+            <div class="container-fluid">
+              <mat-radio-group aria-label="Select an option">
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-radio-button value=""> {{ question.options.option1 }} </mat-radio-button>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-radio-button value=""> {{ question.options.option2 }} </mat-radio-button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-radio-button value=""> {{ question.options.option3 }} </mat-radio-button>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-radio-button value=""> {{ question.options.option4 }} </mat-radio-button>
+                  </div>
+                </div>
+              </mat-radio-group>
+            </div>
+          </mat-panel-description>
+          <mat-action-row class="navigation-row">
+            <div class="answer-panel">
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>Answer</mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-panel-description>
+                  <mat-card-subtitle>The Correct Answer is: &nbsp;<b> {{ question.options.answer }}
+                    </b></mat-card-subtitle>
+                </mat-panel-description>
+              </mat-expansion-panel>
+            </div>
+
+            <div class="navigation-buttons">
+              <button mat-button color="warn" (click)="prevStep()" *ngIf="i !== 0">Previous</button>
+              <button mat-button color="primary" (click)="nextStep()"
+                *ngIf="i !== paginatedQuestions.length - 1">Next</button>
+              <button mat-button color="primary" (click)="nextStep()"
+                *ngIf="i === paginatedQuestions.length - 1">End</button>
+            </div>
+          </mat-action-row>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </mat-card-content>
+
+  <mat-paginator #paginator class="demo-paginator" (page)="handlePageEvent($event)" [length]="questions.length"
+    [pageSize]="itemsPerPage" [disabled]="false" [showFirstLastButtons]="true" [pageSizeOptions]="[10, 20, 30, 40]"
+    [hidePageSize]="false" [pageIndex]="currentPageIndex" aria-label="Select page">
+  </mat-paginator>
+</mat-card>

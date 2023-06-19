@@ -22,11 +22,11 @@ export class QuizService {
   }
 
   public deleteQuiz(quizId: number) {
-    return this.http.delete(`${urlList.quiz.DELETE_QUIZ}/${quizId}`);
+    return this.http.delete(`${urlList.quiz.DELETE_QUIZ}${quizId}`);
   }
 
   getQuizById(quizId: number) {
-    return this.http.get(`${urlList.quiz.GET_QUIZ}/${quizId}`);
+    return this.http.get(`${urlList.quiz.GET_QUIZ}${quizId}`);
   }
 
 }

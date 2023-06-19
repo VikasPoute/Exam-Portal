@@ -1,0 +1,21 @@
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.navigation-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.answer-panel {
+  align-self: flex-start;
+  width: 50%;
+}
+
+.navigation-buttons {
+  display: flex;
+}

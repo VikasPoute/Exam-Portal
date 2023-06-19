@@ -20,10 +20,17 @@
           <mat-chip class="example-box"> {{quiz.maxMarks}} Marks </mat-chip>
           <mat-chip class="example-box"> {{quiz.numberOfQuestions}} Questions </mat-chip>
           <mat-chip class="example-box"> {{quiz.maxMarks}} Attempts </mat-chip>
-          <mat-chip class="example-box">{{ quiz.active ? 'Published' : 'Not Published' }}</mat-chip>
+          <mat-chip class="example-box" [color]="quiz.active ? 'primary' : 'accent'">
+            {{ quiz.active ? 'Published' : 'Not Published' }}
+          </mat-chip>
         </mat-chip-set>
+
       </mat-panel-description>
       <mat-divider></mat-divider>
+      <button [routerLink]="'/admin/quiz/questions/' + quiz.quizName + '/' + quiz.quizId" mat-raised-button
+        color="primary" class="mt-2">
+        <mat-icon>question_mark</mat-icon>Questions</button>
+      &nbsp;
       <button mat-raised-button color="primary" class="mt-2"
         (click)="editQuiz(quiz.quizId)"><mat-icon>edit_note</mat-icon>Edit</button>
       &nbsp;
